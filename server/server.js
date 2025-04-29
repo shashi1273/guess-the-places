@@ -14,7 +14,10 @@ const io = new Server(server, {
   cors: { origin: '*' }
 });
 
-app.use(cors());
+app.use(cors({
+  origin: '*',  
+  methods: ['GET', 'POST']
+}));
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))
