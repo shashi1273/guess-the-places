@@ -5,10 +5,12 @@ import Leaderboard from './components/Leaderboard';
 import UsernamePrompt from './components/UsernamePrompt';
 import ClueDisplay from './components/ClueDisplay';
 
-
-const socket = io('https://guess-the-places.onrender.com');
-
-
+// Change this URL depending on environment
+const socket = io(
+  import.meta.env.PROD
+    ? 'https://your-backend-url.onrender.com'  // Replace with your deployed server URL
+    : 'http://localhost:3001'
+);
 
 function App() {
   const [username, setUsername] = useState('');
@@ -28,9 +30,16 @@ function App() {
       setRoundScore(score);
     });
     socket.on('leaderboard', setLeaderboard);
+
+    return () => {
+      socket.off('clue');
+      socket.off('guessResult');
+      socket.off('roundEnd');
+      socket.off('leaderboard');
+    };
   }, []);
 
-  const handleUsernameSubmit = name => {
+  const handleUsernameSubmit = (name) => {
     setUsername(name);
     socket.emit('join', name);
   };
@@ -42,21 +51,21 @@ function App() {
   };
 
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       {!username && <UsernamePrompt onSubmit={handleUsernameSubmit} />}
       {username && (
         <>
           <ClueDisplay clue={clue} />
           <MapComponent onMapClick={handleMapClick} />
-      {distance !== null && (
-    <p>Distance from target: {distance} {"km"}</p>
-
-  )}
-  <p>Guesses remaining: {remaining}</p>
-  {roundScore !== null && (
-    <p>Round Score: {roundScore}</p>
-  )}
-
+          <>
+            {distance !== null && (
+              <p>Distance from target: {distance} km</p>
+            )}
+            <p>Guesses remaining: {remaining}</p>
+            {roundScore !== null && (
+              <p>Round Score: {roundScore}</p>
+            )}
+          </>
           <Leaderboard data={leaderboard} />
         </>
       )}
