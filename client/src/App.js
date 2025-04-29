@@ -56,18 +56,17 @@ function App() {
       {username && (
         <>
           <ClueDisplay clue={clue} />
-          <MapComponent onMapClick={handleMapClick} />
-          <>
-            {distance !== null && (
-            
-             <p>Distance from target: {`${distance} km`}</p>
+         <MapComponent onMapClick={handleMapClick} />
+<div>
+  {distance !== null && (
+    <p>Distance from target: {`${distance} km`}</p>
+  )}
+  <p>Guesses remaining: {remaining}</p>
+  {roundScore !== null && (
+    <p>Round Score: {roundScore}</p>
+  )}
+</div>
 
-
-            )}
-            <p>Guesses remaining: {remaining}</p>
-            {roundScore !== null && (
-              <p>Round Score: {roundScore}</p>
-            )}
           </>
           <Leaderboard data={leaderboard} />
         </>
