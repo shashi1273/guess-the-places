@@ -58,9 +58,11 @@ io.on('connection', socket => {
       await Player.create({ username });
     }
     socket.emit('joined', username);
-    if (!currentLocation) newRound();
-    socket.emit('clue', currentLocation.clue);
-  });
+   if (!currentLocation) {
+    newRound();  
+  }
+  socket.emit('clue', currentLocation.clue);  
+});
 
   socket.on('guess', async ({ lat, lng }) => {
     const player = players[socket.id];
