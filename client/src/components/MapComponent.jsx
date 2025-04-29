@@ -11,7 +11,10 @@ function MapComponent({ onMapClick }) {
         latitude: 0,
         zoom: 2,
       }}
-      style={{ width: '100vw', height: '400px' }}
+      style={{
+    width: '100vw',
+    height: window.innerWidth > 600 ? '400px' : '250px'  // ✅ Shrink map on small screens
+  }}
       mapStyle="mapbox://styles/mapbox/streets-v11"
       onClick={(e) => onMapClick({ lat: e.lngLat.lat, lng: e.lngLat.lng })}  
       touchAction="auto"  // ✅ Add this
