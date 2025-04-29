@@ -8,7 +8,7 @@ import ClueDisplay from './components/ClueDisplay.jsx';
 // Change this to your Render backend URL
 const socket = io(
   import.meta.env.PROD
-    ? 'https://your-backend-url.onrender.com'  // Replace this with your real backend URL
+    ? 'https://guess-the-places.onrender.com'  // Replace this with your real backend URL
     : 'http://localhost:3001'
 );
 
