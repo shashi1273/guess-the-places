@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import MapComponent from './components/MapComponent.jsx';
 import Leaderboard from './components/Leaderboard.jsx';
 import UsernamePrompt from './components/UsernamePrompt.jsx';
-import ClueDisplay from './components/ClueDisplay';
+import ClueDisplay from './components/ClueDisplay.jsx';
 
 // Change this to your Render backend URL
 const socket = io(
