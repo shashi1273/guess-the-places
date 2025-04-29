@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
-import MapComponent from './components/MapComponent';
+import MapComponent from './components/MapComponent.jsx';
 import Leaderboard from './components/Leaderboard.jsx';
-import UsernamePrompt from './components/UsernamePrompt';
+import UsernamePrompt from './components/UsernamePrompt.jsx';
 import ClueDisplay from './components/ClueDisplay';
 
 // Change this to your Render backend URL
