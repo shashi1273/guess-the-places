@@ -67,20 +67,24 @@ function newRound() {
 io.on('connection', (socket) => {
   console.log('New player connected:', socket.id);
 
-  socket.on('join', async (username) => {
-    players[socket.id] = { username, guesses: 0, bestDistance: null };
-    let existing = await Player.findOne({ username });
-    if (!existing) {
-      await Player.create({ username });
-    }
-    socket.emit('joined', username);
+ socket.on('join', async (username) => {
+  players[socket.id] = { username, guesses: 0, bestDistance: null };
+  let existing = await Player.findOne({ username });
+  if (!existing) {
+    await Player.create({ username });
+  }
+  socket.emit('joined', username);
 
-    if (!currentLocation) {
-      newRound();  // Only pick if no location exists
-    }
+  if (!currentLocation) {
+    newRound();  // only if no current location exists
+  }
 
-    socket.emit('clue', currentLocation.clue);  // Send clue to new player
-  });
+  socket.emit('clue', currentLocation.clue);  // ✅ send the clue
+
+  // ✅ NEW: Send leaderboard immediately upon joining
+  const topPlayers = await Player.find().sort({ score: -1 }).limit(10);
+  socket.emit('leaderboard', topPlayers);  // ✅ send leaderboard only to this player
+});
 
   socket.on('guess', async ({ lat, lng }) => {
     const player = players[socket.id];
