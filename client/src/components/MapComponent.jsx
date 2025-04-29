@@ -14,6 +14,7 @@ function MapComponent({ onMapClick }) {
       style={{ width: '100vw', height: '400px' }}
       mapStyle="mapbox://styles/mapbox/streets-v11"
       onClick={(e) => onMapClick({ lat: e.lngLat.lat, lng: e.lngLat.lng })}  
+      touchAction="auto"  // ✅ Add this
     />
   );
 }
