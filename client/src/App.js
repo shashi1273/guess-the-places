@@ -5,10 +5,10 @@ import Leaderboard from './components/Leaderboard';
 import UsernamePrompt from './components/UsernamePrompt';
 import ClueDisplay from './components/ClueDisplay';
 
-// Change this URL depending on environment
+// Change this to your Render backend URL
 const socket = io(
   import.meta.env.PROD
-    ? 'https://your-backend-url.onrender.com'  // Replace with your deployed server URL
+    ? 'https://your-backend-url.onrender.com'  // Replace this with your real backend URL
     : 'http://localhost:3001'
 );
 
@@ -56,18 +56,16 @@ function App() {
       {username && (
         <>
           <ClueDisplay clue={clue} />
-         <MapComponent onMapClick={handleMapClick} />
-<div>
-  {distance !== null && (
-    <p>Distance from target: {`${distance} km`}</p>
-  )}
-  <p>Guesses remaining: {remaining}</p>
-  {roundScore !== null && (
-    <p>Round Score: {roundScore}</p>
-  )}
-</div>
-
-          </>
+          <MapComponent onMapClick={handleMapClick} />
+          <div>
+            {distance !== null && (
+              <p>Distance from target: {`${distance} km`}</p>
+            )}
+            <p>Guesses remaining: {remaining}</p>
+            {roundScore !== null && (
+              <p>Round Score: {roundScore}</p>
+            )}
+          </div>
           <Leaderboard data={leaderboard} />
         </>
       )}
