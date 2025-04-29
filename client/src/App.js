@@ -5,7 +5,10 @@ import Leaderboard from './components/Leaderboard';
 import UsernamePrompt from './components/UsernamePrompt';
 import ClueDisplay from './components/ClueDisplay';
 
-const socket = io('http://localhost:3001'); // Update if deploying
+
+const socket = io('https://guess-the-places.onrender.com');
+
+
 
 function App() {
   const [username, setUsername] = useState('');
