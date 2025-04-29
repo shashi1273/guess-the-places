@@ -51,7 +51,7 @@ function App() {
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
+   <div style={{ textAlign: 'center', overflowY: 'auto', maxHeight: '100vh' }}>
       {!username && <UsernamePrompt onSubmit={handleUsernameSubmit} />}
       {username && (
         <>
