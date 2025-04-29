@@ -49,7 +49,8 @@ function App() {
           <ClueDisplay clue={clue} />
           <MapComponent onMapClick={handleMapClick} />
       {distance !== null && (
-    <p>Distance from target: {distance} km</p>
+    <p>Distance from target: {distance} {"km"}</p>
+
   )}
   <p>Guesses remaining: {remaining}</p>
   {roundScore !== null && (
