@@ -69,6 +69,9 @@ function App() {
           <Leaderboard data={leaderboard} />
         </>
       )}
+      <footer style={{ marginTop: '2rem', fontSize: '14px', color: '#888' }}>
+  Built with ❤️ by <strong>Arjun and Abhay</strong>
+</footer>
     </div>
   );
 }
