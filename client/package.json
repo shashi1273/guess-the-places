@@ -9,7 +9,7 @@
     "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
-    "vite": "^4.0.0"     //  Vite now added properly for build step
+    "vite": "^4.0.0"     
   },
   "scripts": {
     "dev": "vite",
