@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import MapComponent from './components/MapComponent';
-import Leaderboard from './components/Leaderboard';
+import Leaderboard from './components/Leaderboard.jsx';
 import UsernamePrompt from './components/UsernamePrompt';
 import ClueDisplay from './components/ClueDisplay';
 
