@@ -34,14 +34,7 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('MongoDB connection error:', err));
 
-// ✅ Game locations
-const locations = [
-  { clue: "City with Eiffel Tower", lat: 48.8584, lng: 2.2945 },
-  { clue: "Home of the Statue of Liberty", lat: 40.6892, lng: -74.0445 },
-  { clue: "Great Wall country", lat: 40.4319, lng: 116.5704 },
-  { clue: "Colosseum city", lat: 41.8902, lng: 12.4922 },
-  { clue: "Opera House city", lat: -33.8568, lng: 151.2153 }
-];
+
 
 let currentLocation = null;
 let players = {};
@@ -58,10 +51,32 @@ function haversine(lat1, lon1, lat2, lon2) {
 }
 
 // ✅ Start new round
-function newRound() {
-  currentLocation = locations[Math.floor(Math.random() * locations.length)];
-  io.emit('clue', currentLocation.clue);
+
+async function newRound() {
+  try {
+    const db = mongoose.connection.useDb('test'); // 👈 use the "test" database
+    const result = await db.collection('cities').aggregate([{ $sample: { size: 1 } }]).toArray();
+    
+    if (result.length === 0) {
+      console.error('No cities found in the database.');
+      return;
+    }
+
+    const randomCity = result[0];
+    currentLocation = {
+      clue: randomCity.clue,
+      lat: randomCity.lat,
+      lng: randomCity.long
+    };
+
+    io.emit('clue', currentLocation.clue);
+  } catch (err) {
+    console.error('Failed to fetch random city from MongoDB:', err);
+  }
 }
+
+
+
 
 // ✅ Handle socket events
 io.on('connection', (socket) => {
