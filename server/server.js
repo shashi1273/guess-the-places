@@ -91,7 +91,7 @@ io.on('connection', (socket) => {
   socket.emit('joined', username);
 
   if (!currentLocation) {
-    newRound();  // only if no current location exists
+   await newRound();  // only if no current location exists
   }
 
   socket.emit('clue', currentLocation.clue);  // ✅ send the clue
